@@ -1,0 +1,377 @@
+[DEBUG] ========== 处理第 10/404 个构件 ==========
+[10/404] 处理: com.jeedev.msdp.common:msdp-help
+[DEBUG] 查询所有版本 URL: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.jeedev.msdp.common&name=msdp-help&sort=version&direction=desc
+[DEBUG] curl_auth 调用: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.jeedev.msdp.common&name=msdp-help&sort=version&direction=desc
+[DEBUG] 查询版本 resp (前5000字符): {
+  "items" : [ {
+    "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czowM2E3ZTU3YmJiOTVkYmY3NGVlOTcxMmRlOGNlZWM0Yg",
+    "repository" : "maven-credit-snapshots",
+    "format" : "maven2",
+    "group" : "com.jeedev.msdp.common",
+    "name" : "msdp-help",
+    "version" : "5.0.0-BOOT-SNAPSHOT",
+    "assets" : [ {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/5.0.0-BOOT-SNAPSHOT/msdp-help-5.0.0-BOOT-SNAPSHOT.jar",
+      "path" : "com/jeedev/msdp/common/msdp-help/5.0.0-BOOT-SNAPSHOT/msdp-help-5.0.0-BOOT-SNAPSHOT.jar",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czpmOGI5YTdmYTNlZjA3YWIwZTAwYzI2Y2FmYmQ0NjIwMQ",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "19e2f1bd9ec4f1b29a582a6a59db3d9d18fb63da",
+        "sha256" : "4604823c2641a2bcc00c2ad2ec0a975411e30e26ce957005217556f6944ca846",
+        "sha512" : "f0b680973e4726a4559d86f8b40eb7de8c04ee3b9ab51d28db3210eb90c82d52ddd0499166f1c7377f5db4d0a6c61333a88c70e0ded35813c4cbcc5b4a1e516d",
+        "md5" : "1272e17d29aed440324ab4539abc948b"
+      },
+      "contentType" : "application/java-archive",
+      "lastModified" : "2025-11-05T01:03:16.964+00:00",
+      "lastDownloaded" : "2026-04-07T17:06:38.104+00:00",
+      "uploader" : "admin",
+      "uploaderIp" : "192.169.3.108",
+      "fileSize" : 37000,
+      "blobCreated" : null,
+      "maven2" : {
+        "extension" : "jar",
+        "groupId" : "com.jeedev.msdp.common",
+        "artifactId" : "msdp-help",
+        "version" : "5.0.0-BOOT-SNAPSHOT"
+      }
+    }, {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/5.0.0-BOOT-SNAPSHOT/msdp-help-5.0.0-BOOT-SNAPSHOT.pom",
+      "path" : "com/jeedev/msdp/common/msdp-help/5.0.0-BOOT-SNAPSHOT/msdp-help-5.0.0-BOOT-SNAPSHOT.pom",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoyNDZhMGI2NzVkNzcxMmZiYzU0NTdlNTYyZDcxYzI3MA",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "786b099b532d795cd4c9cb16382089491f411c2f",
+        "sha256" : "82e443daba1693806fcd120fb02a2a544a37f00be1ebbe3ea68b7cf03f97b21d",
+        "sha512" : "e5d5aa5be0949104e7d03664549a444a15ad8220a9f1cea23337396e0c7ff3b09b57df4a945a0a503321f1031d74d4a70eb0cbd6fa0acf707ef440f334f91a34",
+        "md5" : "2ed7f6b14434f49f9fd65b68a64b3b62"
+      },
+      "contentType" : "application/xml",
+      "lastModified" : "2025-11-05T01:03:16.974+00:00",
+      "lastDownloaded" : "2026-04-07T17:06:40.525+00:00",
+      "uploader" : "admin",
+      "uploaderIp" : "192.169.3.108",
+      "fileSize" : 2386,
+      "blobCreated" : null,
+      "maven2" : {
+        "extension" : "pom",
+        "groupId" : "com.jeedev.msdp.common",
+        "artifactId" : "msdp-help",
+        "version" : "5.0.0-BOOT-SNAPSHOT"
+      }
+    } ]
+  }, {
+    "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czplYzc0NDNkYmYzMjYzOTg3NTI2ODNkNGM3MDhkMGU4MQ",
+    "repository" : "maven-credit-snapshots",
+    "format" : "maven2",
+    "group" : "com.jeedev.msdp.common",
+    "name" : "msdp-help",
+    "version" : "3.1.2-BOOT-SNAPSHOT",
+    "assets" : [ {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-SNAPSHOT.jar",
+      "path" : "com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-SNAPSHOT.jar",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoyN2I5MDRiYTQzMWQ5ZTVlMzQ5YmJjZjRhNmVkNjQ3OQ",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "1ed6ce63d53cf34d3412bc48b0ce256a15bd315c",
+        "sha256" : "47c19fde1fdf2c5d66d680e0032f71f692eb086049c0874f0f4d37ce929bc837",
+        "sha512" : "69cd894897826bb3d20d8a00c17d283a9c70bd47a2d1416245c8cdf8b1ba35232a57006993e276c2108c0f51f4f60eb921301dac989db1c4690ba74a989af9cd",
+        "md5" : "ce49714179f613a71b1c6c666171a367"
+      },
+      "contentType" : "application/java-archive",
+      "lastModified" : "2025-11-05T01:03:16.893+00:00",
+      "lastDownloaded" : null,
+      "uploader" : "admin",
+      "uploaderIp" : "192.169.3.108",
+      "fileSize" : 36721,
+      "blobCreated" : null,
+      "maven2" : {
+        "extension" : "jar",
+        "groupId" : "com.jeedev.msdp.common",
+        "artifactId" : "msdp-help",
+        "version" : "3.1.2-BOOT-SNAPSHOT"
+      }
+    }, {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-SNAPSHOT.pom",
+      "path" : "com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-SNAPSHOT.pom",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czpiZDdmNzllMTk2NzMwNTA4ZWExZTk4MzhhN2QzZTcyOQ",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "cabf780e68a512051a53406c78bd7e0a95344283",
+        "sha256" : "c2fc3be68f2506b8c14500
+[DEBUG] 执行 jq: .items | length
+[DEBUG] items 数量: 3
+[DEBUG] 执行 jq: .items[].version
+[DEBUG] 所有版本:
+    - 5.0.0-BOOT-SNAPSHOT
+    - 3.1.2-BOOT-SNAPSHOT
+    - 3.1.2-BOOT-20240819.020740-6
+[DEBUG] 策略: minor，按版本系列分组
+[DEBUG]   分组 [5.0]: 添加版本 5.0.0-BOOT-SNAPSHOT
+[DEBUG]   分组 [3.1]: 添加版本 3.1.2-BOOT-SNAPSHOT
+[DEBUG] 选定的版本 (2 个):
+    - 5.0.0-BOOT-SNAPSHOT
+    - 3.1.2-BOOT-SNAPSHOT
+
+  [版本 1/2] 处理版本: 5.0.0-BOOT-SNAPSHOT
+ 的资产 执行 jq: 查找版本 5.0.0-BOOT-SNAPSHOT
+ 的资产，跳过 到版本 5.0.0-BOOT-SNAPSHOT
+[DEBUG] 版本查询URL: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.jeedev.msdp.common&name=msdp-help&sort=version&direction=desc
+] [DOWNLOAD_FAILED] 下载失败: 未找到资产，查询URL: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.jeedev.msdp.common&name=msdp-help&sort=version&direction=desc
+
+  [版本 2/2] 处理版本: 3.1.2-BOOT-SNAPSHOT
+ 的资产 执行 jq: 查找版本 3.1.2-BOOT-SNAPSHOT
+ 的资产，跳过 到版本 3.1.2-BOOT-SNAPSHOT
+[DEBUG] 版本查询URL: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.jeedev.msdp.common&name=msdp-help&sort=version&direction=desc
+] [DOWNLOAD_FAILED] 下载失败: 未找到资产，查询URL: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.jeedev.msdp.common&name=msdp-help&sort=version&direction=desc
+[DEBUG] ========== 构件处理完成 ==========
+
+
+但是实际查询http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.jeedev.msdp.common&name=msdp-help&sort=version&direction=desc的结果如下：
+{
+  "items": [
+    {
+      "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czowM2E3ZTU3YmJiOTVkYmY3NGVlOTcxMmRlOGNlZWM0Yg",
+      "repository": "maven-credit-snapshots",
+      "format": "maven2",
+      "group": "com.jeedev.msdp.common",
+      "name": "msdp-help",
+      "version": "5.0.0-BOOT-SNAPSHOT",
+      "assets": [
+        {
+          "downloadUrl": "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/5.0.0-BOOT-SNAPSHOT/msdp-help-5.0.0-BOOT-SNAPSHOT.jar",
+          "path": "com/jeedev/msdp/common/msdp-help/5.0.0-BOOT-SNAPSHOT/msdp-help-5.0.0-BOOT-SNAPSHOT.jar",
+          "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czpmOGI5YTdmYTNlZjA3YWIwZTAwYzI2Y2FmYmQ0NjIwMQ",
+          "repository": "maven-credit-snapshots",
+          "format": "maven2",
+          "checksum": {
+            "sha1": "19e2f1bd9ec4f1b29a582a6a59db3d9d18fb63da",
+            "sha256": "4604823c2641a2bcc00c2ad2ec0a975411e30e26ce957005217556f6944ca846",
+            "sha512": "f0b680973e4726a4559d86f8b40eb7de8c04ee3b9ab51d28db3210eb90c82d52ddd0499166f1c7377f5db4d0a6c61333a88c70e0ded35813c4cbcc5b4a1e516d",
+            "md5": "1272e17d29aed440324ab4539abc948b"
+          },
+          "contentType": "application/java-archive",
+          "lastModified": "2025-11-05T01:03:16.964+00:00",
+          "lastDownloaded": "2026-04-07T17:06:38.104+00:00",
+          "uploader": "admin",
+          "uploaderIp": "192.169.3.108",
+          "fileSize": 37000,
+          "blobCreated": null,
+          "maven2": {
+            "extension": "jar",
+            "groupId": "com.jeedev.msdp.common",
+            "artifactId": "msdp-help",
+            "version": "5.0.0-BOOT-SNAPSHOT"
+          }
+        },
+        {
+          "downloadUrl": "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/5.0.0-BOOT-SNAPSHOT/msdp-help-5.0.0-BOOT-SNAPSHOT.pom",
+          "path": "com/jeedev/msdp/common/msdp-help/5.0.0-BOOT-SNAPSHOT/msdp-help-5.0.0-BOOT-SNAPSHOT.pom",
+          "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoyNDZhMGI2NzVkNzcxMmZiYzU0NTdlNTYyZDcxYzI3MA",
+          "repository": "maven-credit-snapshots",
+          "format": "maven2",
+          "checksum": {
+            "sha1": "786b099b532d795cd4c9cb16382089491f411c2f",
+            "sha256": "82e443daba1693806fcd120fb02a2a544a37f00be1ebbe3ea68b7cf03f97b21d",
+            "sha512": "e5d5aa5be0949104e7d03664549a444a15ad8220a9f1cea23337396e0c7ff3b09b57df4a945a0a503321f1031d74d4a70eb0cbd6fa0acf707ef440f334f91a34",
+            "md5": "2ed7f6b14434f49f9fd65b68a64b3b62"
+          },
+          "contentType": "application/xml",
+          "lastModified": "2025-11-05T01:03:16.974+00:00",
+          "lastDownloaded": "2026-04-07T17:06:40.525+00:00",
+          "uploader": "admin",
+          "uploaderIp": "192.169.3.108",
+          "fileSize": 2386,
+          "blobCreated": null,
+          "maven2": {
+            "extension": "pom",
+            "groupId": "com.jeedev.msdp.common",
+            "artifactId": "msdp-help",
+            "version": "5.0.0-BOOT-SNAPSHOT"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czplYzc0NDNkYmYzMjYzOTg3NTI2ODNkNGM3MDhkMGU4MQ",
+      "repository": "maven-credit-snapshots",
+      "format": "maven2",
+      "group": "com.jeedev.msdp.common",
+      "name": "msdp-help",
+      "version": "3.1.2-BOOT-SNAPSHOT",
+      "assets": [
+        {
+          "downloadUrl": "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-SNAPSHOT.jar",
+          "path": "com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-SNAPSHOT.jar",
+          "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoyN2I5MDRiYTQzMWQ5ZTVlMzQ5YmJjZjRhNmVkNjQ3OQ",
+          "repository": "maven-credit-snapshots",
+          "format": "maven2",
+          "checksum": {
+            "sha1": "1ed6ce63d53cf34d3412bc48b0ce256a15bd315c",
+            "sha256": "47c19fde1fdf2c5d66d680e0032f71f692eb086049c0874f0f4d37ce929bc837",
+            "sha512": "69cd894897826bb3d20d8a00c17d283a9c70bd47a2d1416245c8cdf8b1ba35232a57006993e276c2108c0f51f4f60eb921301dac989db1c4690ba74a989af9cd",
+            "md5": "ce49714179f613a71b1c6c666171a367"
+          },
+          "contentType": "application/java-archive",
+          "lastModified": "2025-11-05T01:03:16.893+00:00",
+          "lastDownloaded": null,
+          "uploader": "admin",
+          "uploaderIp": "192.169.3.108",
+          "fileSize": 36721,
+          "blobCreated": null,
+          "maven2": {
+            "extension": "jar",
+            "groupId": "com.jeedev.msdp.common",
+            "artifactId": "msdp-help",
+            "version": "3.1.2-BOOT-SNAPSHOT"
+          }
+        },
+        {
+          "downloadUrl": "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-SNAPSHOT.pom",
+          "path": "com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-SNAPSHOT.pom",
+          "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czpiZDdmNzllMTk2NzMwNTA4ZWExZTk4MzhhN2QzZTcyOQ",
+          "repository": "maven-credit-snapshots",
+          "format": "maven2",
+          "checksum": {
+            "sha1": "cabf780e68a512051a53406c78bd7e0a95344283",
+            "sha256": "c2fc3be68f2506b8c14500c6163065cd78ab1112cb9499a4e9eefc6aad19ee84",
+            "sha512": "8b7b723e3e577a8638fac8ebe7c86370ef8709cd0da47e26b6431ed1721aa14804c89d34d2665f86b43bd4eba6623762a4125ee434dc8741e1d936c94cbea69e",
+            "md5": "db32bfe13d0fec14b1cadb11c996cf70"
+          },
+          "contentType": "application/xml",
+          "lastModified": "2025-11-05T01:03:16.903+00:00",
+          "lastDownloaded": null,
+          "uploader": "admin",
+          "uploaderIp": "192.169.3.108",
+          "fileSize": 2462,
+          "blobCreated": null,
+          "maven2": {
+            "extension": "pom",
+            "groupId": "com.jeedev.msdp.common",
+            "artifactId": "msdp-help",
+            "version": "3.1.2-BOOT-SNAPSHOT"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czo3YjZlNGQxNDE2YjhlOTk5Y2QxZDgwM2ViOTI0MzczZA",
+      "repository": "maven-credit-snapshots",
+      "format": "maven2",
+      "group": "com.jeedev.msdp.common",
+      "name": "msdp-help",
+      "version": "3.1.2-BOOT-20240819.020740-6",
+      "assets": [
+        {
+          "downloadUrl": "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-20240819.020740-6.jar",
+          "path": "com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-20240819.020740-6.jar",
+          "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoxZTA2MWE0NzExODZmZWVmMDE0ZTlmYWU3YTlmODk5ZQ",
+          "repository": "maven-credit-snapshots",
+          "format": "maven2",
+          "checksum": {
+            "sha1": "1ed6ce63d53cf34d3412bc48b0ce256a15bd315c",
+            "sha256": "47c19fde1fdf2c5d66d680e0032f71f692eb086049c0874f0f4d37ce929bc837",
+            "sha512": "69cd894897826bb3d20d8a00c17d283a9c70bd47a2d1416245c8cdf8b1ba35232a57006993e276c2108c0f51f4f60eb921301dac989db1c4690ba74a989af9cd",
+            "md5": "ce49714179f613a71b1c6c666171a367"
+          },
+          "contentType": "application/java-archive",
+          "lastModified": "2025-11-05T01:03:16.812+00:00",
+          "lastDownloaded": null,
+          "uploader": "admin",
+          "uploaderIp": "192.169.3.108",
+          "fileSize": 36721,
+          "blobCreated": null,
+          "maven2": {
+            "extension": "jar",
+            "groupId": "com.jeedev.msdp.common",
+            "artifactId": "msdp-help",
+            "version": "3.1.2-BOOT-20240819.020740-6"
+          }
+        },
+        {
+          "downloadUrl": "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-20240819.020740-6.jar.sha1",
+          "path": "com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-20240819.020740-6.jar.sha1",
+          "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoxYTY4NzRkMzFiYTg0NjgxYWEzZGY1OWYyMTUyNmQ5Mw",
+          "repository": "maven-credit-snapshots",
+          "format": "maven2",
+          "checksum": {
+            "sha1": "e6a8365445358393df7ef60783e109e9eced0122",
+            "sha256": "37cc58fad7f5cfc3cd146ee9f8fac0a51e4a2d9f41eb76d47c4841ebc0fa22b5",
+            "sha512": "d55ad4f70bab5288cd51114f3524857132254056624c3f471619b5e7a51475e71c65e62b2a1521d77b6c9d359c00d3fbd7c9462b09ad63bb82e63140236eaac2",
+            "md5": "85242fd1dfc29d696517289138c4d46e"
+          },
+          "contentType": "text/plain",
+          "lastModified": "2025-11-05T01:03:16.823+00:00",
+          "lastDownloaded": null,
+          "uploader": "admin",
+          "uploaderIp": "192.169.3.108",
+          "fileSize": 40,
+          "blobCreated": null,
+          "maven2": {
+            "extension": "jar.sha1",
+            "groupId": "com.jeedev.msdp.common",
+            "artifactId": "msdp-help",
+            "version": "3.1.2-BOOT-20240819.020740-6"
+          }
+        },
+        {
+          "downloadUrl": "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-20240819.020740-6.pom",
+          "path": "com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-20240819.020740-6.pom",
+          "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czphMmEzMGRmODIxMTUyMDU2MDBlZjE2NzU0OTZlNzBjZg",
+          "repository": "maven-credit-snapshots",
+          "format": "maven2",
+          "checksum": {
+            "sha1": "cabf780e68a512051a53406c78bd7e0a95344283",
+            "sha256": "c2fc3be68f2506b8c14500c6163065cd78ab1112cb9499a4e9eefc6aad19ee84",
+            "sha512": "8b7b723e3e577a8638fac8ebe7c86370ef8709cd0da47e26b6431ed1721aa14804c89d34d2665f86b43bd4eba6623762a4125ee434dc8741e1d936c94cbea69e",
+            "md5": "db32bfe13d0fec14b1cadb11c996cf70"
+          },
+          "contentType": "application/xml",
+          "lastModified": "2025-11-05T01:03:16.872+00:00",
+          "lastDownloaded": null,
+          "uploader": "admin",
+          "uploaderIp": "192.169.3.108",
+          "fileSize": 2462,
+          "blobCreated": null,
+          "maven2": {
+            "extension": "pom",
+            "groupId": "com.jeedev.msdp.common",
+            "artifactId": "msdp-help",
+            "version": "3.1.2-BOOT-20240819.020740-6"
+          }
+        },
+        {
+          "downloadUrl": "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-20240819.020740-6.pom.sha1",
+          "path": "com/jeedev/msdp/common/msdp-help/3.1.2-BOOT-SNAPSHOT/msdp-help-3.1.2-BOOT-20240819.020740-6.pom.sha1",
+          "id": "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czpkODMzMDA1ZDQ5YzM0OGU4ZmNiYTM3ZGM5NTA3OTdjMQ",
+          "repository": "maven-credit-snapshots",
+          "format": "maven2",
+          "checksum": {
+            "sha1": "88875faf448f69908a50a8aff32d237ce40c1698",
+            "sha256": "62261afa5a1459c3884605c2cd861c4a516bf6ebe36f3ae5c81841edb41d998e",
+            "sha512": "dc819cc14b9f3dfadf0bb1efd2b27a82195193b7d75490f94956c669dfde61ba59404ae657ca9f47bf5dcdb5d2cd0c78cd060ade28950fe2cf81309540be99af",
+            "md5": "4e81bece0f8323a04c9763db8e751c5b"
+          },
+          "contentType": "text/plain",
+          "lastModified": "2025-11-05T01:03:16.882+00:00",
+          "lastDownloaded": null,
+          "uploader": "admin",
+          "uploaderIp": "192.169.3.108",
+          "fileSize": 40,
+          "blobCreated": null,
+          "maven2": {
+            "extension": "pom.sha1",
+            "groupId": "com.jeedev.msdp.common",
+            "artifactId": "msdp-help",
+            "version": "3.1.2-BOOT-20240819.020740-6"
+          }
+        }
+      ]
+    }
+  ],
+  "continuationToken": null
+}
+

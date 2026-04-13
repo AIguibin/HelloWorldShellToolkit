@@ -1,0 +1,343 @@
+[DEBUG] ========== 处理第 36/404 个构件 ==========
+[36/404] 处理: com.tansun.ipc:ipc-asura-client
+[DEBUG] 查询所有版本 URL: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.tansun.ipc&name=ipc-asura-client&sort=version&direction=desc
+[DEBUG] curl_auth 调用: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.tansun.ipc&name=ipc-asura-client&sort=version&direction=desc
+[DEBUG] 查询版本 resp (前5000字符): {
+  "items" : [ {
+    "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czo3YjZlNGQxNDE2YjhlOTk5NTJmYjNmZTdkN2YyNzZjMQ",
+    "repository" : "maven-credit-snapshots",
+    "format" : "maven2",
+    "group" : "com.tansun.ipc",
+    "name" : "ipc-asura-client",
+    "version" : "3.6.0-gx-20251220.074004-12",
+    "assets" : [ {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/tansun/ipc/ipc-asura-client/3.6.0-gx-SNAPSHOT/ipc-asura-client-3.6.0-gx-20251220.074004-12.jar",
+      "path" : "com/tansun/ipc/ipc-asura-client/3.6.0-gx-SNAPSHOT/ipc-asura-client-3.6.0-gx-20251220.074004-12.jar",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoyN2I5MDRiYTQzMWQ5ZTVlODQ5ZjIyZTMzZGVmOWJiZA",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "b07edb774093fa1f225611ae62bee40206a1923e",
+        "sha256" : "51b76b5edaa1b02c1a448218ccd14ff87283146855f700c7b028785474735bc7",
+        "sha512" : "27ff7c9e562b7f420a9d6827c8f57e4bf5fea64f6ba1268105918cdb8cfd6bfecd65fb9f78bcced5967d39805a9ece78fd350d4e2c4c3696e17165ac29ec9ec5",
+        "md5" : "90257c875dbcf8e778502bd048534707"
+      },
+      "contentType" : "application/java-archive",
+      "lastModified" : "2025-12-20T07:51:15.428+00:00",
+      "lastDownloaded" : "2026-03-04T02:19:14.992+00:00",
+      "uploader" : "admin",
+      "uploaderIp" : "192.168.111.166",
+      "fileSize" : 4719,
+      "blobCreated" : null,
+      "maven2" : {
+        "extension" : "jar",
+        "groupId" : "com.tansun.ipc",
+        "artifactId" : "ipc-asura-client",
+        "version" : "3.6.0-gx-20251220.074004-12"
+      }
+    }, {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/tansun/ipc/ipc-asura-client/3.6.0-gx-SNAPSHOT/ipc-asura-client-3.6.0-gx-20251220.074004-12.jar.md5",
+      "path" : "com/tansun/ipc/ipc-asura-client/3.6.0-gx-SNAPSHOT/ipc-asura-client-3.6.0-gx-20251220.074004-12.jar.md5",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czpmOGI5YTdmYTNlZjA3YWIwMDA0OGRlNGE3YTkzNzBjZA",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "f9adb39a928e194281f004ddb16c3c75c2f744f2",
+        "sha256" : "b8624f7b0354d21de3da21084f9d07af09901c4080fb7f8beae947d6ad590190",
+        "sha512" : "7f8f0329d73887eff55c3c088c87b7582c96b0d05628f0241e30c780fbba6ea9e205e17bf2d460921f3208285d1b724f8f49a51f292da7b3ed0b22ec76351289",
+        "md5" : "d3c2b8c6dbf995ba98ff4d725dcd8647"
+      },
+      "contentType" : "text/plain",
+      "lastModified" : "2025-12-20T07:51:15.447+00:00",
+      "lastDownloaded" : null,
+      "uploader" : "admin",
+      "uploaderIp" : "192.168.111.166",
+      "fileSize" : 32,
+      "blobCreated" : null,
+      "maven2" : {
+        "extension" : "jar.md5",
+        "groupId" : "com.tansun.ipc",
+        "artifactId" : "ipc-asura-client",
+        "version" : "3.6.0-gx-20251220.074004-12"
+      }
+    }, {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/tansun/ipc/ipc-asura-client/3.6.0-gx-SNAPSHOT/ipc-asura-client-3.6.0-gx-20251220.074004-12.jar.sha1",
+      "path" : "com/tansun/ipc/ipc-asura-client/3.6.0-gx-SNAPSHOT/ipc-asura-client-3.6.0-gx-20251220.074004-12.jar.sha1",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czpiZDdmNzllMTk2NzMwNTA4ZWNiMGRiODdiN2EzNWYwNg",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "98ddaa0d13e7caaeadf6619f1e720b6e7fb27974",
+        "sha256" : "b2fe2b181dce1188aa08f84880f3f974a5256102874d47722e89bbedab505221",
+        "sha512" : "5bc397c6f26036e0720d41da1e9b38467998487339c17ed1f71bb8349183ef622d5a74fef4b93dee964bd24dcc624fe18ce3e66b139fd162bb7ce4aa28f76094",
+        "md5" : "5126d0cf19d46b9bcd40cf75d799a493"
+      },
+      "contentType" : "text/plain",
+      "lastModified" : "2025-12-20T07:51:15.438+00:00",
+      "lastDownloaded" : null,
+      "uploader" : "admin",
+      "uploaderIp" : "192.168.111.166",
+      "fileSize" : 40,
+      "blobCreated" : null,
+      "maven2" : {
+        "extension" : "jar.sha1",
+        "groupId" : "com.tansun.ipc",
+        "artifactId" : "ipc-asura-client",
+        "version" : "3.6.0-gx-20251220.074004-12"
+      }
+    }, {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/tansun/ipc/ipc-asura-client/3.6.0-gx-SNAPSHOT/ipc-asura-client-3.6.0-gx-20251220.074004-12.pom",
+      "path" : "com/tansun/ipc/ipc-asura-client/3.6.0-gx-SNAPSHOT/ipc-asura-client-3.6.0-gx-20251220.074004-12.pom",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoyNDZhMGI2NzVkNzcxMmZiZmExZmE1YzYzZmY0NjdmYQ",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "31d6d463d91a437904f515b5dc53ee0b66c69353",
+        "sha256" : "d712387d9a0025f146f76046746eb0fc1fd374364421653695401abfa86d8a5a",
+        "sha512" : "2b907b5417a8165694dc779ae37e2ef6efd748a5602c2340dcfc2a6da98002a5b94da31927c617338058a5224c3bee60e7e42f09651345ee5110a46
+[DEBUG] 执行 jq: .items | length
+[DEBUG] items 数量: 12
+[DEBUG] 执行 jq: .items[].version
+[DEBUG] 所有版本:
+    - 3.6.0-gx-20251113.110910-1
+    - 3.6.0-gx-20251125.035915-2
+    - 3.6.0-gx-20251125.062348-3
+    - 3.6.0-gx-20251208.041329-4
+    - 3.6.0-gx-20251215.091856-5
+    - 3.6.0-gx-20251215.133114-6
+    - 3.6.0-gx-20251216.011321-7
+    - 3.6.0-gx-20251216.021753-8
+    - 3.6.0-gx-20251216.030358-9
+    - 3.6.0-gx-20251219.023300-10
+    - 3.6.0-gx-20251219.081104-11
+    - 3.6.0-gx-20251220.074004-12
+[DEBUG] 策略: minor，按版本系列分组
+[DEBUG]   分组 [3.6]: 添加版本 3.6.0-gx-20251113.110910-1
+[DEBUG] 选定的版本 (1 个):
+    - 3.6.0-gx-20251113.110910-1
+
+  [版本 1/1] 处理版本: 3.6.0-gx-20251113.110910-1
+ 的资产 执行 jq: 查找版本 3.6.0-gx-20251113.110910-1
+ 的资产，跳过 到版本 3.6.0-gx-20251113.110910-1
+] [DOWNLOAD_FAILED] 下载失败: 未找到资产om.tansun.ipc:ipc-asura-client:3.6.0-gx-20251113.110910-1
+[DEBUG] ========== 构件处理完成 ==========
+
+
+[DEBUG] ========== 处理第 20/404 个构件 ==========
+[20/404] 处理: com.jeedev.msdp.common:msdp-iweb
+[DEBUG] 查询所有版本 URL: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.jeedev.msdp.common&name=msdp-iweb&sort=version&direction=desc
+[DEBUG] curl_auth 调用: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-snapshots&group=com.jeedev.msdp.common&name=msdp-iweb&sort=version&direction=desc
+[DEBUG] 查询版本 resp (前5000字符): {
+  "items" : [ {
+    "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czowM2E3ZTU3YmJiOTVkYmY3YmJiNWJmMjFmMWU3MDIxZA",
+    "repository" : "maven-credit-snapshots",
+    "format" : "maven2",
+    "group" : "com.jeedev.msdp.common",
+    "name" : "msdp-iweb",
+    "version" : "5.0.0-BOOT-SNAPSHOT",
+    "assets" : [ {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar",
+      "path" : "com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoxZTA2MWE0NzExODZmZWVmY2FlNzlkNjVkZWY0MjljMQ",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "eeb00bfaaf0203695c734981f96698e9a4ea443e",
+        "sha256" : "7b9b8a24fad3b0752d82ffde6ec58f30ba624d663948a797bbb7f09bf722dfee",
+        "sha512" : "b569fbcc3ae038baa8a5d4636c035ba8718c3e078ee14d5af50e4434dd91d64631a983abc9a18cb56bb42f9072ddfe8b03189a872b28cf9a2ab418fe41586b76",
+        "md5" : "e28cd1f3aadfc778ebaab193e500b5df"
+      },
+      "contentType" : "application/java-archive",
+      "lastModified" : "2025-11-05T01:03:18.350+00:00",
+      "lastDownloaded" : "2026-04-07T17:10:30.193+00:00",
+      "uploader" : "admin",
+      "uploaderIp" : "192.169.3.108",
+      "fileSize" : 90943,
+      "blobCreated" : null,
+      "maven2" : {
+        "extension" : "jar",
+        "groupId" : "com.jeedev.msdp.common",
+        "artifactId" : "msdp-iweb",
+        "version" : "5.0.0-BOOT-SNAPSHOT"
+      }
+    }, {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom",
+      "path" : "com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoxYTY4NzRkMzFiYTg0NjgxMjMyYWEzOWNmMzhkM2E1MQ",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "394532f042d8c3e1a336012480a9a79886a8febb",
+        "sha256" : "1471f18e6e89258edddb766ea7a74ee4ee023560f4d426d28c6c9f20ab7aaf62",
+        "sha512" : "4dec07d39a036d0363d06beeb531a594e4e3d6823eede124c404771f62a56a24ccdadb8fd8885424108109ad40232b7a52ae34f25ad37390d03c2add7d0e43b4",
+        "md5" : "a3f5c4ba026856be035fee47bc9101de"
+      },
+      "contentType" : "application/xml",
+      "lastModified" : "2025-11-05T01:03:18.359+00:00",
+      "lastDownloaded" : "2026-04-07T17:10:32.333+00:00",
+      "uploader" : "admin",
+      "uploaderIp" : "192.169.3.108",
+      "fileSize" : 1719,
+      "blobCreated" : null,
+      "maven2" : {
+        "extension" : "pom",
+        "groupId" : "com.jeedev.msdp.common",
+        "artifactId" : "msdp-iweb",
+        "version" : "5.0.0-BOOT-SNAPSHOT"
+      }
+    } ]
+  }, {
+    "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czplYzc0NDNkYmYzMjYzOTg3NDY2NjFjOGY1YWU4NTk4NQ",
+    "repository" : "maven-credit-snapshots",
+    "format" : "maven2",
+    "group" : "com.jeedev.msdp.common",
+    "name" : "msdp-iweb",
+    "version" : "3.1.2-BOOT-SNAPSHOT",
+    "assets" : [ {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-iweb/3.1.2-BOOT-SNAPSHOT/msdp-iweb-3.1.2-BOOT-SNAPSHOT.jar",
+      "path" : "com/jeedev/msdp/common/msdp-iweb/3.1.2-BOOT-SNAPSHOT/msdp-iweb-3.1.2-BOOT-SNAPSHOT.jar",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czpmOGI5YTdmYTNlZjA3YWIwNzY5MzQ2YjM0YWVmODJkNA",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "dddbcc9a7bda66ee09a119d8f13c2dd5d65881a2",
+        "sha256" : "b14ab22e787c1f932bb5ea78f9ad6e83c9cafd7f8e99b17052f02fa6bb7f46e9",
+        "sha512" : "3db57c3ea999d8a1a10b61d18550aff75621f5387234cdc4958827d5a112bad864a854cfc7915b7215585a88353f937ff44a649dafe65569a6c9ce0ff37991aa",
+        "md5" : "79637968772fdaa8d6b33ad8e9533a1d"
+      },
+      "contentType" : "application/java-archive",
+      "lastModified" : "2025-11-05T01:03:18.283+00:00",
+      "lastDownloaded" : null,
+      "uploader" : "admin",
+      "uploaderIp" : "192.169.3.108",
+      "fileSize" : 55182,
+      "blobCreated" : null,
+      "maven2" : {
+        "extension" : "jar",
+        "groupId" : "com.jeedev.msdp.common",
+        "artifactId" : "msdp-iweb",
+        "version" : "3.1.2-BOOT-SNAPSHOT"
+      }
+    }, {
+      "downloadUrl" : "http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-iweb/3.1.2-BOOT-SNAPSHOT/msdp-iweb-3.1.2-BOOT-SNAPSHOT.pom",
+      "path" : "com/jeedev/msdp/common/msdp-iweb/3.1.2-BOOT-SNAPSHOT/msdp-iweb-3.1.2-BOOT-SNAPSHOT.pom",
+      "id" : "bWF2ZW4tY3JlZGl0LXNuYXBzaG90czoyNDZhMGI2NzVkNzcxMmZiMTk0ZWQ3MWUxYjJjODg4Mw",
+      "repository" : "maven-credit-snapshots",
+      "format" : "maven2",
+      "checksum" : {
+        "sha1" : "fe14144302e1b5418fe501bd11d60590c572d391",
+        "sha256" : "c4e978366911407cc63cc2
+[DEBUG] 执行 jq: .items | length
+[DEBUG] items 数量: 3
+[DEBUG] 执行 jq: .items[].version
+[DEBUG] 所有版本:
+    - 3.1.2-BOOT-20240819.020745-9
+    - 3.1.2-BOOT-SNAPSHOT
+    - 5.0.0-BOOT-SNAPSHOT
+[DEBUG] 策略: minor，按版本系列分组
+[DEBUG]   分组 [3.1]: 添加版本 3.1.2-BOOT-20240819.020745-9
+[DEBUG]   分组 [5.0]: 添加版本 5.0.0-BOOT-SNAPSHOT
+[DEBUG] 选定的版本 (2 个):
+    - 5.0.0-BOOT-SNAPSHOT
+    - 3.1.2-BOOT-20240819.020745-9
+
+  [版本 1/2] 处理版本: 5.0.0-BOOT-SNAPSHOT
+[DEBUG] 执行 jq: 查找版本 5.0.0-BOOT-SNAPSHOT 的资产
+[DEBUG] 开始幂等检查...
+[DEBUG] component_exists 开始检查: com.jeedev.msdp.common:msdp-iweb:5.0.0-BOOT-SNAPSHOT
+[DEBUG] curl_auth 调用: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-dev-snapshots&group=com.jeedev.msdp.common&name=msdp-iweb&version=5.0.0-BOOT-SNAPSHOT
+[DEBUG] component_exists URL: http://192.15.3.99:10390/service/rest/v1/search?repository=maven-credit-dev-snapshots&group=com.jeedev.msdp.common&name=msdp-iweb&version=5.0.0-BOOT-SNAPSHOT
+[DEBUG] component_exists resp (前5000字符): {
+  "items" : [ ],
+  "continuationToken" : null
+}
+[DEBUG] component_exists 执行 jq: .items | length
+[DEBUG] component_exists 查询结果数量: 0
+[DEBUG] 幂等检查通过，目标仓库不存在，继续同步
+[DEBUG] 开始下载主文件...
+[DEBUG] ----- 处理第 1 个 asset -----
+[DEBUG] 处理 asset: {"downloadUrl":"http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar","path":"com/jeedev/msdp/common/msdp-i
+[DEBUG] 执行 jq: .downloadUrl
+[DEBUG] download_url: http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar
+[DEBUG] 执行 jq: .path
+[DEBUG] path: com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar
+[DEBUG] filename: msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar
+[DEBUG] 提取扩展名: jar
+[DEBUG] 扩展名 jar 在同步列表中，继续处理
+[DEBUG] 提取分类器: 无
+[DEBUG] 本地文件路径: /e/Temp/nexus-sync-61495/all/msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar
+      下载: msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar
+[DEBUG] curl_auth 调用: -o
+[DEBUG] 下载成功: /e/Temp/nexus-sync-61495/all/msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar
+[DEBUG] 添加到 asset_files: ext=jar, classifier=
+[DEBUG] ----- 处理第 2 个 asset -----
+[DEBUG] 处理 asset: {"downloadUrl":"http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom","path":"com/jeedev/msdp/common/msdp-i
+[DEBUG] 执行 jq: .downloadUrl
+[DEBUG] download_url: http://192.15.3.99:10390/repository/maven-credit-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom
+[DEBUG] 执行 jq: .path
+[DEBUG] path: com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom
+[DEBUG] filename: msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom
+[DEBUG] 提取扩展名: pom
+[DEBUG] 扩展名 pom 在同步列表中，继续处理
+[DEBUG] 提取分类器: 无
+[DEBUG] 本地文件路径: /e/Temp/nexus-sync-61495/all/msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom
+      下载: msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom
+[DEBUG] curl_auth 调用: -o
+[DEBUG] 下载成功: /e/Temp/nexus-sync-61495/all/msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom
+[DEBUG] 添加到 asset_files: ext=pom, classifier=
+[DEBUG] 共处理 2 个 asset，有效文件 2 个
+[DEBUG] 开始上传...
+[DEBUG] upload_component 开始上传: com.jeedev.msdp.common:msdp-iweb:5.0.0-BOOT-SNAPSHOT
+[DEBUG] upload_component 资产数量: 2
+[DEBUG] 使用 settings.xml 认证，目标仓库URL: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/
+[DEBUG] upload_component 资产: ext=jar, classifier=, filepath=/e/Temp/nexus-sync-61495/all/msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar
+[DEBUG] 识别为主文件: /e/Temp/nexus-sync-61495/all/msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar (ext=jar)
+[DEBUG] upload_component 资产: ext=pom, classifier=, filepath=/e/Temp/nexus-sync-61495/all/msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom
+[DEBUG] 识别为 POM 文件: /e/Temp/nexus-sync-61495/all/msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom
+  上传: com.jeedev.msdp.common:msdp-iweb:5.0.0-BOOT-SNAPSHOT
+[DEBUG] upload_component 执行 Maven deploy:deploy-file...
+[DEBUG] Maven 命令: mvn -s
+D:\Maven\config\ncms-admin-dev-settings.xml
+deploy:deploy-file
+-DgroupId=com.jeedev.msdp.common
+-DartifactId=msdp-iweb
+-Dversion=5.0.0-BOOT-SNAPSHOT
+-Dpackaging=jar
+-Dfile=/e/Temp/nexus-sync-61495/all/msdp-iweb-5.0.0-BOOT-SNAPSHOT.jar
+-Durl=http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/
+-DpomFile=/e/Temp/nexus-sync-61495/all/msdp-iweb-5.0.0-BOOT-SNAPSHOT.pom
+-DrepositoryId=nexus-snapshots
+[DEBUG] Maven 输出:
+    [INFO] Scanning for projects...
+    [INFO]
+    [INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+    [INFO] Building Maven Stub Project (No POM) 1
+    [INFO] --------------------------------[ pom ]---------------------------------
+    [INFO]
+    [INFO] --- deploy:3.1.2:deploy-file (default-cli) @ standalone-pom ---
+    Downloading from nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/maven-metadata.xml
+Downloaded from nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/maven-metadata.xml (796 B at 5.1 kB/s)
+    Uploading to nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-20260408.012218-6.jar
+Uploaded to nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-20260408.012218-6.jar (91 kB at 1.2 MB/s)
+    Uploading to nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-20260408.012218-6.pom
+Uploaded to nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/msdp-iweb-5.0.0-BOOT-20260408.012218-6.pom (1.7 kB at 49 kB/s)
+    Downloading from nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/maven-metadata.xml
+Downloaded from nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/maven-metadata.xml (296 B at 9.5 kB/s)
+    Uploading to nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/maven-metadata.xml
+Uploaded to nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/5.0.0-BOOT-SNAPSHOT/maven-metadata.xml (796 B at 22 kB/s)
+    Uploading to nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/maven-metadata.xml
+Uploaded to nexus-snapshots: http://192.15.3.99:10390/repository/maven-credit-dev-snapshots/com/jeedev/msdp/common/msdp-iweb/maven-metadata.xml (296 B at 8.7 kB/s)
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD SUCCESS
+    [INFO] ------------------------------------------------------------------------
+    [INFO] Total time:  2.317 s
+    [INFO] Finished at: 2026-04-08T09:22:20+08:00
+    [INFO] ------------------------------------------------------------------------
+[DEBUG] upload_component 上传成功
+[DEBUG] upload_component 返回成功
+    完成
+
+  [版本 2/2] 处理版本: 3.1.2-BOOT-20240819.020745-9
+ 的资产 执行 jq: 查找版本 3.1.2-BOOT-20240819.020745-9
+ 的资产，跳过 到版本 3.1.2-BOOT-20240819.020745-9
+] [DOWNLOAD_FAILED] 下载失败: 未找到资产om.jeedev.msdp.common:msdp-iweb:3.1.2-BOOT-20240819.020745-9
