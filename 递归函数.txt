@@ -1,0 +1,24 @@
+        zyfpLookupRegFn: function (docList) {
+          var _this = this;
+          var datacodeArray = [];
+          if (docList && docList.length > 0) {
+            docList.forEach(function (item, index) {
+              if (item.templateList && item.templateList.length > 0) {
+                item.templateList.forEach(function (template, index) {
+                  if (template.fieldList && template.fieldList.length > 0) {
+                    template.fieldList.forEach(function (field, index) {
+                      if (field.fieldOptions && !!field.fieldOptions.match(/^[a-z]+$/i)) {
+                        datacodeArray.push(field.fieldOptions);
+                      }
+                    });
+                  }
+                });
+              }
+              // 递归必须先执行完自己兄弟级别代码
+              if (item.sub && item.sub.length > 0) {
+                _this.zyfpLookupRegFn(item.sub);
+              }
+            });
+          }
+          zyfp.lookup.reg(datacodeArray.join(','))
+        }

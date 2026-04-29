@@ -1,0 +1,5 @@
+=LOWER(LEFT(B2,1))&SUBSTITUTE(MID(B2,2,100),"_","")
+=UPPER("COMMENT ON TABLE "   &   " "  &C56&   " IS "  &  "'"   &A56&  "'"   &   ";" )
+=VLOOKUP(I2,数据格式汇总!B:F,3,FALSE)
+="<zy-xform-item label="""&B4&""""&" "&"ctype="&"""input"""&" name="""&LOWER(LEFT(C4,1))&SUBSTITUTE(MID(C4,2,100),"_","")&""""&"></zy-xform-item>"
+="INSERT INTO ADMIN_SM_LOOKUP_ITEM (LOOKUP_ITEM_ID, LOOKUP_CODE, LOOKUP_ITEM_CODE, LOOKUP_ITEM_NAME, LOOKUP_ITEM_COMMENT) VALUES (sys_guid(), '"&A2&"', '"&C2&"', '"&D2&"', '"&E2&"');"
