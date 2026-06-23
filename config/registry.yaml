@@ -1,0 +1,159 @@
+# 脚本注册表配置文件
+# 每个 command 定义一个可用的 /命令
+# 修改后需重启或使用 /reload 重载
+
+commands:
+  - name: hello
+    script: hello.py
+    description: 向世界问好
+    tags: [demo, greeting]
+    params:
+      - name: name
+        type: string
+        required: false
+        default: World
+        description: 问候对象名称
+        flag: name
+
+  - name: build
+    script: build.py
+    description: 构建项目
+    tags: [build, ci]
+    params:
+      - name: target
+        type: choice
+        required: true
+        description: 构建目标
+        choices: [debug, release, test]
+        flag: target
+      - name: env
+        type: string
+        required: false
+        default: dev
+        description: 环境标识
+        flag: env
+      - name: clean
+        type: bool
+        required: false
+        default: false
+        description: 构建前清理
+        flag: clean
+
+  - name: deploy
+    script: deploy.py
+    description: 部署到目标环境
+    tags: [deploy, cd]
+    params:
+      - name: env
+        type: choice
+        required: true
+        description: 部署环境
+        choices: [dev, staging, prod]
+        flag: env
+      - name: dry_run
+        type: bool
+        required: false
+        default: false
+        description: 干跑模式（不实际部署）
+        flag: dry-run
+
+  - name: sysinfo
+    script: sysinfo.py
+    description: 显示系统信息
+    tags: [system, info]
+    params:
+      - name: section
+        type: choice
+        required: false
+        default: all
+        description: 显示的模块
+        choices: [all, system, python, env]
+        flag: section
+
+  # ─── Shell / Bat / PS1 / JS 脚本 ─────────────
+
+  - name: gitinfo
+    script: gitinfo.sh
+    description: 查看 Git 仓库信息（Bash）
+    tags: [git, info, shell]
+
+  - name: link-remote-repo
+    script: aiguibin-link-remote-repo.sh
+    description: 将当前本地目录关联到远程 Git 仓库（初始化/提交/拉取/推送一条龙）
+    tags: [git, remote, repo, shell]
+    params:
+      - name: repo-url
+        type: string
+        required: true
+        description: 远程仓库地址（位置参数或 --repo-url，如 https://github.com/user/repo.git）
+        flag: repo-url
+      - name: branch
+        type: string
+        required: false
+        default: master
+        description: 目标分支名（位置参数2，默认 master）
+        flag: branch
+
+  - name: diskinfo
+    script: diskinfo.py
+    description: 查看磁盘空间信息
+    tags: [system, disk]
+
+  - name: ping
+    script: ping.ps1
+    description: 网络连通性测试（PowerShell）
+    tags: [network, test, powershell]
+    params:
+      - name: host
+        type: string
+        required: false
+        default: baidu.com
+        description: 目标主机
+        flag: host
+      - name: count
+        type: string
+        required: false
+        default: "4"
+        description: ping 次数
+        flag: count
+
+  - name: npmcheck
+    script: npmcheck.js
+    description: 检查 npm 依赖状态（Node.js）
+    tags: [node, npm, check]
+    params:
+      - name: outdated
+        type: bool
+        required: false
+        default: false
+        description: 检查过期包
+        flag: outdated
+
+  # ─── 文档工具 ────────────────────────────────
+
+  - name: compare-excel
+    script: aiguibin-compare-excel.py
+    description: Excel 并排对比工具（以 A 为基准，左右展示差异，差异单元格黄色+红色标记）
+    tags: [excel, compare, document, office]
+    params:
+      - name: output
+        type: string
+        required: false
+        description: 输出文件路径（默认 compare-result-v{时间戳}.xlsx）
+        flag: output
+      - name: key-col
+        type: string
+        required: false
+        description: 手动指定关键列名或列字母（如 工号 或 B）
+        flag: key-col
+      - name: auto-key
+        type: bool
+        required: false
+        default: false
+        description: 自动检测值唯一的列作为关键列
+        flag: auto-key
+      - name: sheets
+        type: string
+        required: false
+        description: 指定对比的 Sheet 名（支持：-s Sheet1 Sheet2 或 --sheets=Sheet1,Sheet2）
+        flag: sheets

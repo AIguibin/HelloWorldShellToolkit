@@ -1,0 +1,83 @@
+﻿#!/usr/bin/env bash
+# ============================================================
+#  AIguibin Agent System v3.5 - Global Entry Point (Bash)
+#
+#  Supports: Git Bash, MSYS2 Bash, WSL, Linux, macOS
+#
+#  Python search priority:
+#    1. Embedded Python (AIGUIBIN_CLI_HOME/python/python.exe)
+#    2. .venv Python (AIGUIBIN_CLI_HOME/.venv/bin/python)
+#    3. System Python (python3 / python)
+#
+#  Usage:
+#    aiguibin              Start interactive CLI
+#    aiguibin /hello       Run a command
+#    aiguibin /build --target=release
+#
+#  Setup:
+#    1. Run install.bat (Windows) or add bin/ to PATH
+#    2. Or symlink: sudo ln -s /path/to/aiguibin/bin/aiguibin /usr/local/bin/aiguibin
+# ============================================================
+
+# Resolve AIGUIBIN_CLI_HOME: the directory where aiguibin.py lives
+# (parent of the bin/ directory containing this script)
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+AIGUIBIN_CLI_HOME="$(dirname "$SCRIPT_DIR")"
+
+# Detect if we are on Windows (MSYS2, Git Bash, Cygwin)
+IS_WINDOWS=false
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" ]]; then
+    IS_WINDOWS=true
+fi
+
+# On Windows (MSYS2/Git Bash/Cygwin), convert paths to Windows format
+# because Windows Python cannot parse Unix-style paths like /e/WorkSpace/...
+if $IS_WINDOWS && command -v cygpath &>/dev/null; then
+    AIGUIBIN_CLI_HOME_FWD="$(cygpath -w "$AIGUIBIN_CLI_HOME")"
+else
+    AIGUIBIN_CLI_HOME_FWD="$AIGUIBIN_CLI_HOME"
+fi
+
+# Export environment variables (Windows-format for cross-compatibility)
+export AIGUIBIN_CLI_HOME="$AIGUIBIN_CLI_HOME_FWD"
+
+# Set AIGUIBIN_BASH
+if [ -f "$AIGUIBIN_CLI_HOME_FWD/git/usr/bin/bash.exe" ]; then
+    export AIGUIBIN_BASH="$AIGUIBIN_CLI_HOME_FWD/git/usr/bin/bash.exe"
+fi
+
+# Python search priority: embedded -> .venv -> system
+PYTHON=""
+if [ -f "$AIGUIBIN_CLI_HOME_FWD/python/python.exe" ]; then
+    # Windows embedded Python (python.exe)
+    PYTHON="$AIGUIBIN_CLI_HOME_FWD/python/python.exe"
+    export AIGUIBIN_PYTHON="$PYTHON"
+elif [ -f "$AIGUIBIN_CLI_HOME_FWD/python/bin/python" ]; then
+    # Unix-style embedded Python
+    PYTHON="$AIGUIBIN_CLI_HOME_FWD/python/bin/python"
+    export AIGUIBIN_PYTHON="$PYTHON"
+elif [ -f "$AIGUIBIN_CLI_HOME_FWD/.venv/bin/python" ]; then
+    # venv Python (Linux/macOS)
+    PYTHON="$AIGUIBIN_CLI_HOME_FWD/.venv/bin/python"
+elif [ -f "$AIGUIBIN_CLI_HOME_FWD/.venv/Scripts/python.exe" ]; then
+    # venv Python (Windows)
+    PYTHON="$AIGUIBIN_CLI_HOME_FWD/.venv/Scripts/python.exe"
+elif command -v python3 &>/dev/null; then
+    PYTHON="python3"
+elif command -v python &>/dev/null; then
+    PYTHON="python"
+else
+    echo "ERROR: Python not found!"
+    echo "  Please install Python or run install.bat / install.sh"
+    exit 1
+fi
+
+# Prevent MSYS2/Git Bash from converting /command arguments to Windows paths
+# e.g. /env should NOT be converted to E:\...\env
+# This must be set BEFORE the exec call so it affects the child process
+if $IS_WINDOWS; then
+    export MSYS_NO_PATHCONV=1
+fi
+
+# Execute aiguibin.py, passing all command line arguments
+exec "$PYTHON" "$AIGUIBIN_CLI_HOME_FWD/aiguibin.py" "$@"

@@ -1,0 +1,118 @@
+# AIguibinCLI Shell Tools Configuration
+# 管理额外的Shell工具和二进制文件
+
+# 工具列表
+tools:
+  # 快速文件搜索工具
+  - name: ripgrep
+    description: Fast file search tool (rg)
+    windows_binary: "rg.exe"
+    download_url: "https://github.com/BurntSushi/ripgrep/releases"
+    version: "14.0.3"
+    path: "tools/binaries/"
+    homepage: "https://github.com/BurntSushi/ripgrep"
+    required: false
+    tags: [productivity, search]
+    install_method: download
+
+  # 快速文件查找工具
+  - name: fd
+    description: Fast file/directory finder (alternative to find)
+    windows_binary: "fd.exe"
+    download_url: "https://github.com/sharkdp/fd/releases"
+    version: "8.7.0"
+    path: "tools/binaries/"
+    homepage: "https://github.com/sharkdp/fd"
+    required: false
+    tags: [productivity, filesystem]
+    install_method: download
+
+  # 增强的cat命令
+  - name: bat
+    description: Enhanced cat with syntax highlighting
+    windows_binary: "bat.exe"
+    download_url: "https://github.com/sharkdp/bat/releases"
+    version: "0.23.0"
+    path: "tools/binaries/"
+    homepage: "https://github.com/sharkdp/bat"
+    required: false
+    tags: [productivity, display]
+    install_method: download
+
+  # 增强的ls命令
+  - name: exa
+    description: Enhanced ls with colors and git integration
+    windows_binary: "exa.exe"
+    download_url: "https://github.com/ogham/exa/releases"
+    version: "0.10.1"
+    path: "tools/binaries/"
+    homepage: "https://github.com/ogham/exa"
+    required: false
+    tags: [productivity, filesystem]
+    install_method: download
+
+  # 模糊查找器
+  - name: fzf
+    description: Command-line fuzzy finder
+    windows_binary: "fzf.exe"
+    download_url: "https://github.com/junegunn/fzf/releases"
+    version: "0.40.0"
+    path: "tools/binaries/"
+    homepage: "https://github.com/junegunn/fzf"
+    required: false
+    tags: [productivity, search]
+    install_method: download
+
+  # 现代HTTP客户端
+  - name: httpie
+    description: User-friendly command-line HTTP client
+    windows_binary: "http.exe"
+    download_url: "https://github.com/httpie/cli/releases"
+    version: "3.2.1"
+    path: "tools/binaries/"
+    homepage: "https://httpie.io"
+    required: false
+    tags: [network, http]
+    install_method: download
+
+  # 跨平台下载工具
+  - name: curl
+    description: Command-line tool for transferring data with URLs
+    windows_binary: "curl.exe"
+    download_url: "https://curl.se/windows/"
+    version: "8.2.1"
+    path: "tools/binaries/"
+    homepage: "https://curl.se"
+    required: false
+    tags: [network, download]
+    install_method: download
+
+# 工具别名映射（可选）
+aliases:
+  rg: ripgrep
+  fd: fd
+  bat: bat
+  ls: exa
+  find: fd
+
+# 工具组（便于批量安装）
+tool_groups:
+  productivity:
+    description: Productivity enhancement tools
+    tools: [ripgrep, fd, bat, exa, fzf]
+
+  network:
+    description: Network and HTTP tools
+    tools: [curl, httpie]
+
+  full:
+    description: All recommended tools
+    tools: [ripgrep, fd, bat, exa, fzf, curl, httpie]
+
+# 安装说明
+install_notes: |
+  1. 工具可以手动下载到 tools/binaries/ 目录
+  2. 使用 /add-tool 命令自动下载和安装工具
+  3. 使用 /list-tools 查看已安装的工具
+  4. 使用 /remove-tool 卸载不需要的工具
+  5. 工具会自动添加到 PATH 环境变量

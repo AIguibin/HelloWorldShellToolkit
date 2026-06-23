@@ -1,0 +1,36 @@
+# AIguibinCLI 忽略规则
+
+# 应用数据
+.agent/
+.agent_history
+
+# 内嵌运行时（不纳入版本控制，install.bat/bootstrap.py 自动下载）
+python/
+git/
+node/
+
+# 虚拟环境
+.venv/
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# 安装包（不应提交）
+*.sfx.exe
+*.zip
+
+# 任务产物
+.aiguibin/
+
+# 构建产物
+dist/
+
+# OS 文件
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

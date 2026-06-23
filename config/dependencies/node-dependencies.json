@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "created": "2024-06-22",
+    "description": "AIguibinCLI Node.js Dependencies Configuration"
+  },
+  "node_version": "22.0.0",
+  "npm_version": "10.0.0",
+  "install_settings": {
+    "global_install_path": "node/",
+    "local_install_path": "node/node_modules/",
+    "registry": "https://registry.npmmirror.com"
+  },
+  "global_packages": {
+    "typescript": {
+      "version": "^5.0.0",
+      "description": "TypeScript compiler",
+      "required": true,
+      "tags": ["core", "typescript"]
+    },
+    "nodemon": {
+      "version": "^2.0.22",
+      "description": "Auto-restart Node.js applications",
+      "required": false,
+      "tags": ["optional", "development"]
+    },
+    "ts-node": {
+      "version": "^10.9.1",
+      "description": "TypeScript execution environment",
+      "required": false,
+      "tags": ["optional", "typescript"]
+    }
+  },
+  "local_packages": {
+    "express": {
+      "version": "^4.18.2",
+      "description": "Web application framework",
+      "required": false,
+      "tags": ["optional", "web"]
+    },
+    "axios": {
+      "version": "^1.4.0",
+      "description": "HTTP client",
+      "required": false,
+      "tags": ["optional", "network"]
+    }
+  },
+  "dev_packages": {
+    "jest": {
+      "version": "^29.5.0",
+      "description": "Testing framework",
+      "required": false,
+      "tags": ["dev", "testing"]
+    },
+    "eslint": {
+      "version": "^8.40.0",
+      "description": "Code linter",
+      "required": false,
+      "tags": ["dev", "linting"]
+    }
+  },
+  "notes": {
+    "global_packages": "Installed to node/node_modules/ globally for all projects",
+    "local_packages": "Installed to node/node_modules/ locally",
+    "dev_packages": "Development tools only",
+    "registry": "Using npmmirror for faster downloads in China"
+  }
+}
