@@ -186,18 +186,38 @@ class AiguibinCLI:
         except FileNotFoundError:
             pass
 
-        # 自动补全
-        def completer(text, state):
-            commands = [
-                f"/{cmd.name}" for cmd in self.registry.list_commands()
-            ]
-            commands += ["/help", "/list", "/status", "/register",
+        # 自动补全：命令名补全 + 文件路径补全
+        _all_commands = []
+        for cmd in self.registry.list_commands():
+            _all_commands.append(f"/{cmd.name}")
+        _all_commands += ["/help", "/list", "/status", "/register",
                          "/unregister", "/reload", "/exit", "/quit",
                          "/workspace", "/cd", "/shell", "/install-pkg",
                          "/env", "/doctor"]
-            matches = [c for c in commands if c.startswith(text)]
-            if state < len(matches):
-                return matches[state]
+
+        def completer(text, state):
+            # 读当前输入行的完整内容和光标位置
+            line = readline.get_line_buffer()
+            # 如果以 / 开头且光标在第一个 token → 命令名补全
+            if line.startswith("/") and " " not in line:
+                matches = [c for c in _all_commands if c.startswith(text)]
+                if state < len(matches):
+                    return matches[state]
+                return None
+            # 否则 → 文件路径补全（支持含空格的路径用引号包裹）
+            import glob as _glob
+            # 去掉可能的引号
+            clean = text.strip('"').strip("'")
+            matches = _glob.glob(clean + "*")
+            # 将含空格的路径用引号包裹
+            wrapped = []
+            for m in matches:
+                if " " in m:
+                    wrapped.append(f'"{m}"')
+                else:
+                    wrapped.append(m)
+            if state < len(wrapped):
+                return wrapped[state]
             return None
 
         readline.set_completer(completer)
@@ -291,6 +311,8 @@ class AiguibinCLI:
             # 使用内嵌 Git Bash 执行命令
             env = os.environ.copy()
             env["PATH"] = self.runtime_detector.build_path_env()
+            env["LANG"] = "zh_CN.UTF-8"
+            env["LC_ALL"] = "zh_CN.UTF-8"
             result = subprocess.run(
                 [bash_path, "-c", cmd],
                 env=env,

@@ -40,6 +40,62 @@ except ImportError:
     print("[错误] 缺少 openpyxl 依赖，请运行：pip install openpyxl")
     sys.exit(1)
 
+try:
+    import yaml
+    HAS_YAML = True
+except ImportError:
+    HAS_YAML = False
+
+try:
+    import xlrd
+    HAS_XLRD = True
+except ImportError:
+    HAS_XLRD = False
+
+
+def _load_workbook(file_path: str, **kwargs):
+    """
+    加载 Excel 文件（自动处理 .xls 和 .xlsx 格式）。
+    .xls 文件通过 xlrd → openpyxl 临时转换加载。
+    """
+    ext = Path(file_path).suffix.lower()
+    if ext == '.xls' and not kwargs.get('data_only') is False:
+        # .xls 老格式：用 xlrd 读取后转为 openpyxl Workbook
+        if not HAS_XLRD:
+            print("[错误] 读取 .xls 文件需要 xlrd，请运行：pip install xlrd==1.2.0")
+            sys.exit(1)
+        return _convert_xls_to_openpyxl(file_path)
+    return load_workbook(file_path, **kwargs)
+
+
+def _convert_xls_to_openpyxl(file_path: str):
+    """使用 xlrd 读取 .xls 文件并转换为 openpyxl Workbook（只读值）"""
+    xls_book = xlrd.open_workbook(file_path, formatting_info=False)
+    wb = Workbook()
+    # 删除默认 Sheet
+    if "Sheet" in wb.sheetnames:
+        del wb["Sheet"]
+
+    for sheet_idx in range(xls_book.nsheets):
+        xls_sheet = xls_book.sheet_by_index(sheet_idx)
+        sheet_name = xls_sheet.name[:31]  # Excel Sheet 名最长31字符
+        ws = wb.create_sheet(title=sheet_name)
+
+        for row_idx in range(xls_sheet.nrows):
+            for col_idx in range(xls_sheet.ncols):
+                cell_value = xls_sheet.cell_value(row_idx, col_idx)
+                # 处理 xlrd 的日期类型
+                if xls_sheet.cell_type(row_idx, col_idx) == xlrd.XL_CELL_DATE:
+                    try:
+                        dt = xlrd.xldate_as_datetime(cell_value, xls_book.datemode)
+                        cell_value = dt.strftime("%Y-%m-%d %H:%M:%S")
+                    except Exception:
+                        pass
+                if cell_value != '':
+                    ws.cell(row=row_idx + 1, column=col_idx + 1, value=cell_value)
+
+    return wb
+
 # ─────────────────────────────────────────────
 # 样式常量（左右并排模式）
 # ─────────────────────────────────────────────
@@ -77,10 +133,134 @@ def _is_json_string(s: str) -> bool:
     return (s.startswith('{') and s.endswith('}')) or (s.startswith('[') and s.endswith(']'))
 
 
-def _compare_values(a_val, b_val, compare_json: bool = True) -> bool:
+def _is_yaml_string(s: str) -> bool:
+    """判断字符串是否可能是 YAML（非 JSON，有多行 key: value 模式）"""
+    if not HAS_YAML:
+        return False
+    s = s.strip()
+    if not s:
+        return False
+    # 排除 JSON
+    if _is_json_string(s):
+        return False
+    # 至少需要多行
+    if '\n' not in s:
+        return False
+    # 检测 YAML key-value 模式（至少2行）
+    import re
+    lines = s.split('\n')
+    yaml_line_count = 0
+    for line in lines:
+        stripped = line.strip()
+        if not stripped or stripped.startswith('#'):
+            continue
+        if re.match(r'^[\w][\w.\-\']*\s*:', stripped):
+            yaml_line_count += 1
+    return yaml_line_count >= 2
+
+
+def _is_structured_string(s: str) -> bool:
+    """判断字符串是否为结构化数据（JSON 或 YAML）"""
+    return _is_json_string(s) or _is_yaml_string(s)
+
+
+# ─────────────────────────────────────────────
+# 结构化数据深度对比（JSON/YAML 路径级差异检测）
+# ─────────────────────────────────────────────
+
+# 模块级累加器：存储结构化差异详情
+_structured_diff_accumulator = []
+
+
+def _format_value(val, max_len: int = 500) -> str:
+    """格式化值用于差异展示，超长截断"""
+    if val is None:
+        return "(空)"
+    if isinstance(val, bool):
+        return "true" if val else "false"
+    s = str(val)
+    if len(s) > max_len:
+        return s[:max_len] + "..."
+    return s
+
+
+def _deep_compare(a, b, path: str, diffs: list):
+    """递归深度比较两个对象（dict/list/scalar），收集路径级差异"""
+    if isinstance(a, dict) and isinstance(b, dict):
+        all_keys = set(a.keys()) | set(b.keys())
+        for key in sorted(all_keys):
+            key_path = f"{path}.{key}" if path else key
+            if key not in a:
+                diffs.append({
+                    "path": key_path, "type": "added",
+                    "value_a": None, "value_b": _format_value(b[key])
+                })
+            elif key not in b:
+                diffs.append({
+                    "path": key_path, "type": "removed",
+                    "value_a": _format_value(a[key]), "value_b": None
+                })
+            else:
+                _deep_compare(a[key], b[key], key_path, diffs)
+    elif isinstance(a, list) and isinstance(b, list):
+        for i in range(max(len(a), len(b))):
+            idx_path = f"{path}[{i}]"
+            if i >= len(a):
+                diffs.append({
+                    "path": idx_path, "type": "added",
+                    "value_a": None, "value_b": _format_value(b[i])
+                })
+            elif i >= len(b):
+                diffs.append({
+                    "path": idx_path, "type": "removed",
+                    "value_a": _format_value(a[i]), "value_b": None
+                })
+            else:
+                _deep_compare(a[i], b[i], idx_path, diffs)
+    else:
+        if a != b:
+            diffs.append({
+                "path": path, "type": "changed",
+                "value_a": _format_value(a), "value_b": _format_value(b)
+            })
+
+
+def _compare_structured_deep(a_str: str, b_str: str):
     """
-    比较两个值是否相同（类型感知，支持 JSON 智能比较）
-    - JSON 字符串：解析后比较（忽略字段顺序）
+    深度比较两个结构化字符串（JSON 或 YAML），返回路径级差异。
+    Returns: (is_same: bool, diffs: list, fmt: str)
+    """
+    # 尝试 JSON
+    if _is_json_string(a_str) and _is_json_string(b_str):
+        try:
+            a_obj = json.loads(a_str)
+            b_obj = json.loads(b_str)
+            fmt = "json"
+        except (json.JSONDecodeError, TypeError):
+            # JSON 解析失败，回退到字符串比较
+            return a_str == b_str, [], "text"
+    # 尝试 YAML
+    elif _is_yaml_string(a_str) and _is_yaml_string(b_str) and HAS_YAML:
+        try:
+            a_obj = yaml.safe_load(a_str)
+            b_obj = yaml.safe_load(b_str)
+            fmt = "yaml"
+        except yaml.YAMLError:
+            return a_str == b_str, [], "text"
+    else:
+        return a_str == b_str, [], "text"
+
+    # 递归深度比较
+    diffs = []
+    _deep_compare(a_obj, b_obj, "", diffs)
+    return len(diffs) == 0, diffs, fmt
+
+
+def _compare_values(a_val, b_val, compare_json: bool = True,
+                    sheet_name: str = "", row: int = 0, col: int = 0) -> bool:
+    """
+    比较两个值是否相同（类型感知，支持 JSON/YAML 结构化深度比较）
+    - 结构化字符串（JSON/YAML）：深度比较并自动记录路径级差异
     - 数值：自动类型转换比较
     - 其他：字符串精确比较
     """
@@ -92,14 +272,21 @@ def _compare_values(a_val, b_val, compare_json: bool = True) -> bool:
     a_str = str(a_val).strip()
     b_str = str(b_val).strip()
 
-    # JSON 智能比较
-    if compare_json and _is_json_string(a_str) and _is_json_string(b_str):
-        try:
-            a_json = json.loads(a_str)
-            b_json = json.loads(b_str)
-            return a_json == b_json
-        except (json.JSONDecodeError, TypeError):
-            pass
+    # 结构化数据（JSON/YAML）深度比较
+    if compare_json and _is_structured_string(a_str) and _is_structured_string(b_str):
+        is_same, diffs, fmt = _compare_structured_deep(a_str, b_str)
+        if not is_same:
+            # 记录到全局累加器
+            col_letter = get_column_letter(col) if col else ""
+            _structured_diff_accumulator.append({
+                "sheet": sheet_name,
+                "row": row,
+                "col": col,
+                "col_letter": col_letter,
+                "format": fmt,
+                "diffs": diffs,
+            })
+        return is_same
 
     # 数值比较
     try:
@@ -211,6 +398,95 @@ def copy_cell_style(src_cell, dst_cell):
 
 
 # ─────────────────────────────────────────────
+# 结构化差异 → Markdown 报告生成
+# ─────────────────────────────────────────────
+
+def _generate_structured_diff_md(output_path: str, file_a: str, file_b: str):
+    """根据全局累加器生成结构化深度对比 Markdown 报告"""
+    global _structured_diff_accumulator
+
+    if not _structured_diff_accumulator:
+        return  # 无结构化差异，跳过
+
+    lines = []
+    lines.append("# Excel 结构化数据深度对比报告")
+    lines.append("")
+    lines.append("## 文件信息")
+    lines.append("")
+    lines.append(f"- **文件 A（基准）**：`{file_a}`")
+    lines.append(f"- **文件 B（对比）**：`{file_b}`")
+    lines.append("")
+
+    # 按 Sheet 分组
+    from collections import OrderedDict
+    grouped = OrderedDict()
+    for item in _structured_diff_accumulator:
+        sheet = item["sheet"]
+        if sheet not in grouped:
+            grouped[sheet] = []
+        grouped[sheet].append(item)
+
+    # 统计
+    total_diffs = sum(len(item["diffs"]) for item in _structured_diff_accumulator)
+    total_cells = len(_structured_diff_accumulator)
+    lines.append("## 概览")
+    lines.append("")
+    lines.append(f"- **涉及 Sheet 数**：{len(grouped)}")
+    lines.append(f"- **含结构化差异的单元格数**：{total_cells}")
+    lines.append(f"- **差异路径总数**：{total_diffs}")
+    lines.append("")
+
+    # 按 Sheet 输出
+    for sheet, items in grouped.items():
+        lines.append(f"## Sheet: `{sheet}`")
+        lines.append("")
+
+        for item in items:
+            cell_label = f"{item['col_letter']}{item['row']}" if item['col_letter'] else f"第{item['col']}列第{item['row']}行"
+            fmt_label = item["format"].upper()
+            cell_diffs = item["diffs"]
+            diff_count = len(cell_diffs)
+
+            # 分类统计
+            added_count = sum(1 for d in cell_diffs if d["type"] == "added")
+            removed_count = sum(1 for d in cell_diffs if d["type"] == "removed")
+            changed_count = sum(1 for d in cell_diffs if d["type"] == "changed")
+
+            lines.append(f"### 单元格 {cell_label}（{fmt_label}）— 共 {diff_count} 处差异")
+            lines.append("")
+            lines.append(f"_新增 {added_count} | 移除 {removed_count} | 变更 {changed_count}_")
+            lines.append("")
+            lines.append("| 路径 | 类型 | 值（A/基板） | 值（B/对比） |")
+            lines.append("|------|------|-------------|-------------|")
+
+            type_emoji = {"added": "🟢 新增", "removed": "🔴 移除", "changed": "🟡 变更"}
+            for d in cell_diffs:
+                path = f"`{d['path']}`" if d['path'] else "`(root)`"
+                t = type_emoji.get(d["type"], d["type"])
+                va = d["value_a"] if d["value_a"] else "—"
+                vb = d["value_b"] if d["value_b"] else "—"
+                # 转义管道符
+                va = str(va).replace("|", "\\|")
+                vb = str(vb).replace("|", "\\|")
+                lines.append(f"| {path} | {t} | {va} | {vb} |")
+
+            lines.append("")
+
+    # 页脚
+    lines.append("---")
+    lines.append(f"*报告由 Excel 通用对比工具自动生成*")
+
+    # 写入文件
+    md_path = Path(output_path)
+    md_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(md_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+
+    print(f"[MD报告] 结构化深度对比报告已保存至：{md_path.resolve()}")
+    return str(md_path.resolve())
+
+
+# ─────────────────────────────────────────────
 # 模式1：左右并排对比
 # ─────────────────────────────────────────────
 
@@ -222,13 +498,17 @@ def compare_side_by_side(
     target_sheets: Optional[List[str]] = None,
     target_columns: Optional[List[str]] = None,
     compare_json: bool = True,
+    diff_only: bool = False,
 ) -> str:
     """
     执行左右并排对比，生成结果文件。
     返回输出文件路径。
     """
-    wb_a = load_workbook(file_a, data_only=True)
-    wb_b = load_workbook(file_b, data_only=True)
+    global _structured_diff_accumulator
+    _structured_diff_accumulator.clear()
+
+    wb_a = _load_workbook(file_a, data_only=True)
+    wb_b = _load_workbook(file_b, data_only=True)
 
     # 确定输出文件路径
     if output_file is None:
@@ -236,7 +516,7 @@ def compare_side_by_side(
         output_file = f"compare-result-v{timestamp}.xlsx"
 
     # 以 A 为模板复制（保留样式）
-    wb_out = load_workbook(file_a)
+    wb_out = _load_workbook(file_a)
 
     # 确定要处理的 Sheet 列表
     if target_sheets:
@@ -290,7 +570,7 @@ def compare_side_by_side(
                 print(f"[提示] 关键列已自动加入对比列")
             print(f"[处理] Sheet '{sheet_name}'：对比列 = {col_indices}")
         else:
-            col_indices = list(range(1, len(headers_a) + 1))
+            col_indices = list(range(1, ws_a.max_column + 1))
 
         # 读取数据
         headers_a, data_a = read_sheet_to_dict(ws_a, key_col_idx, compare_json)
@@ -308,6 +588,7 @@ def compare_side_by_side(
 
         # 逐行处理 A 的数据
         b_matched_keys = set()
+        rows_all_same = []  # 记录全部匹配的行号（diff_only 时用于删除）
 
         for row_idx in range(2, ws_a.max_row + 1):
             key_val = ws_a.cell(row=row_idx, column=key_col_idx).value
@@ -320,6 +601,7 @@ def compare_side_by_side(
             if key_str in data_b:
                 b_matched_keys.add(key_str)
                 b_row_data = data_b[key_str]
+                row_has_diff = False
 
                 for i, col_idx in enumerate(col_indices):
                     dst_cell = ws_out.cell(row=row_idx, column=offset_col + i)
@@ -329,22 +611,35 @@ def compare_side_by_side(
                     a_cell = ws_out.cell(row=row_idx, column=col_idx)
                     a_val = a_cell.value
 
-                    same = _compare_values(a_val, b_val, compare_json)
+                    same = _compare_values(a_val, b_val, compare_json,
+                                          sheet_name, row_idx, col_idx)
 
                     if same:
                         copy_cell_style(a_cell, dst_cell)
                     else:
+                        row_has_diff = True
                         dst_cell.fill = FILL_DIFF
                         dst_cell.font = FONT_DIFF
                         if a_cell.alignment:
                             dst_cell.alignment = copy.copy(a_cell.alignment)
                         if a_cell.number_format:
                             dst_cell.number_format = a_cell.number_format
+
+                if diff_only and not row_has_diff:
+                    rows_all_same.append(row_idx)
             else:
-                pass  # A有B无：右侧留空
+                # A有B无：右侧单元格填充黄色底色
+                for i, col_idx in enumerate(col_indices):
+                    dst_cell = ws_out.cell(row=row_idx, column=offset_col + i)
+                    dst_cell.fill = FILL_DIFF
+
+        # diff_only 模式：删除全部相同的行（倒序删除避免行号偏移）
+        if diff_only and rows_all_same:
+            for row_idx in reversed(rows_all_same):
+                ws_out.delete_rows(row_idx)
 
         # 追加 B 独有数据到最底部
-        b_only_start_row = ws_a.max_row + 1
+        b_only_start_row = ws_out.max_row + 1
 
         for key_str, b_row_data in data_b.items():
             if key_str in b_matched_keys:
@@ -354,6 +649,9 @@ def compare_side_by_side(
                 dst_cell = ws_out.cell(row=b_only_start_row, column=offset_col + i)
                 b_val = b_row_data[col_idx - 1] if col_idx <= len(b_row_data) else None
                 dst_cell.value = b_val
+                # B有A无：黄底 + 红字加粗
+                dst_cell.fill = FILL_DIFF
+                dst_cell.font = FONT_DIFF
 
             b_only_start_row += 1
 
@@ -374,6 +672,11 @@ def compare_side_by_side(
     wb_out.save(str(out_path))
     wb_a.close()
     wb_b.close()
+
+    # 生成结构化深度对比 Markdown 报告
+    md_stem = out_path.stem
+    md_output = str(out_path.parent / f"{md_stem}_structured_diff.md")
+    _generate_structured_diff_md(md_output, file_a, file_b)
 
     print(f"[完成] 结果已保存至：{out_path.resolve()}")
     return str(out_path.resolve())
@@ -444,7 +747,8 @@ def compare_sheets_detail(ws_a, ws_b, compare_formula: bool = False, compare_jso
         val_a = cell_a.value
         val_b = cell_b.value
 
-        same = _compare_values(val_a, val_b, compare_json)
+        same = _compare_values(val_a, val_b, compare_json,
+                               ws_a.title, k[0], k[1])
 
         if same:
             result["equal_count"] += 1
@@ -473,8 +777,11 @@ def compare_files_report(
     对比两个 Excel 文件，生成差异报告。
     返回差异汇总字典。
     """
-    wb_a = load_workbook(file_a, data_only=True)
-    wb_b = load_workbook(file_b, data_only=True)
+    global _structured_diff_accumulator
+    _structured_diff_accumulator.clear()
+
+    wb_a = _load_workbook(file_a, data_only=True)
+    wb_b = _load_workbook(file_b, data_only=True)
 
     all_sheets_a = set(wb_a.sheetnames)
     all_sheets_b = set(wb_b.sheetnames)
@@ -532,6 +839,11 @@ def compare_files_report(
         wb_out.save(str(out_path))
         summary["output_file"] = str(out_path.resolve())
 
+        # 生成结构化深度对比 Markdown 报告
+        md_stem = out_path.stem
+        md_output = str(out_path.parent / f"{md_stem}_structured_diff.md")
+        _generate_structured_diff_md(md_output, file_a, file_b)
+
     wb_a.close()
     wb_b.close()
 
@@ -585,7 +897,8 @@ def _write_sheet_report(wb_out, sheet_name: str, ws_a, ws_b, cmp: Dict, include_
         for k in sorted(cells_a.keys() & cells_b.keys()):
             val_a = cells_a[k].value
             val_b = cells_b[k].value
-            same = _compare_values(val_a, val_b, compare_json)
+            same = _compare_values(val_a, val_b, compare_json,
+                                   sheet_name, k[0], k[1])
             if same:
                 ws.cell(row=row_cursor, column=1, value=k[0])
                 ws.cell(row=row_cursor, column=2, value=get_column_letter(k[1]))
@@ -795,6 +1108,7 @@ def main():
     parser.add_argument("--equal", action="store_true", help="在报告中包含相同单元格（仅 report 模式）")
     parser.add_argument("--json", help="将汇总结果导出为 JSON 文件")
     parser.add_argument("--no-json-compare", action="store_true", help="禁用 JSON 智能对比")
+    parser.add_argument("--diff-only", action="store_true", help="仅输出有差异的行，完全相同的行不输出（仅 side-by-side 模式）")
 
     args = parser.parse_args()
 
@@ -820,6 +1134,7 @@ def main():
             target_sheets=args.sheets,
             target_columns=args.columns,
             compare_json=compare_json,
+            diff_only=args.diff_only,
         )
         print(f"\n[成功] 输出文件：{output_path}")
 

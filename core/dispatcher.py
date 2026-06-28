@@ -469,6 +469,9 @@ class Dispatcher:
                 # 设置 HOME 为用户目录
                 home_dir = os.path.join(git_home, "home", os.environ.get("USERNAME", "user"))
                 env["HOME"] = home_dir
+                # 设置 locale 确保中文正常显示
+                env["LANG"] = "zh_CN.UTF-8"
+                env["LC_ALL"] = "zh_CN.UTF-8"
 
             # 启动交互式 Bash
             result = subprocess.run(

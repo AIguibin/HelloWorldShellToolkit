@@ -4,7 +4,7 @@ REM   AIguibin Agent System v3.5 - Installer
 REM
 REM   What it installs:
 REM     1. Python Embeddable (standalone Python interpreter)
-REM     2. Python packages (rich, pyyaml, pyreadline3, openpyxl)
+REM     2. Python packages (rich, pyyaml, pyreadline3, openpyxl, xlrd)
 REM     3. PortableGit (Git Bash + git CLI)
 REM     4. Node.js 22.x LTS (portable)
 REM     5. PATH environment variable
@@ -204,9 +204,9 @@ echo.
 REM --- 7. Install Python dependencies ---
 SET "SITE_PKGS=%PYTHON_DIR%\Lib\site-packages"
 
-echo [7/14] Installing Python packages (rich, pyyaml, pyreadline3, openpyxl)...
+echo [7/14] Installing Python packages (rich, pyyaml, pyreadline3, openpyxl, xlrd==1.2.0)...
 
-"%PYTHON_DIR%\python.exe" -m pip install rich pyyaml pyreadline3 openpyxl --target "%SITE_PKGS%" -q
+"%PYTHON_DIR%\python.exe" -m pip install rich pyyaml pyreadline3 openpyxl xlrd==1.2.0 --target "%SITE_PKGS%" -q
 IF %ERRORLEVEL% NEQ 0 GOTO :pkg_error
 echo        Packages installed to %SITE_PKGS%
 GOTO :pkg_done
@@ -214,7 +214,7 @@ GOTO :pkg_done
 :pkg_error
 echo [ERROR] Python package installation failed
 echo        Try running manually:
-echo        %PYTHON_DIR%\python.exe -m pip install rich pyyaml pyreadline3 openpyxl --target "%SITE_PKGS%"
+echo        %PYTHON_DIR%\python.exe -m pip install rich pyyaml pyreadline3 openpyxl xlrd==1.2.0 --target "%SITE_PKGS%"
 pause
 exit /b 1
 

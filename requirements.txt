@@ -2,3 +2,4 @@ rich>=13.0.0
 pyyaml>=6.0
 pyreadline3>=3.4.1; sys_platform == "win32"
 openpyxl>=3.1.0
+xlrd==1.2.0

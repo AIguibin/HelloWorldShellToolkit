@@ -157,3 +157,30 @@ commands:
         required: false
         description: 指定对比的 Sheet 名（支持：-s Sheet1 Sheet2 或 --sheets=Sheet1,Sheet2）
         flag: sheets
+
+  - name: batch-compare
+    script: batch-compare.py
+    description: 批量对比两个目录下所有 Excel 文件，按子目录一一配对并生成差异报告
+    tags: [excel, compare, batch, document]
+    params:
+      - name: dir_a
+        type: string
+        required: true
+        description: 基板目录（基准版本）
+        flag: dir-a
+      - name: dir_b
+        type: string
+        required: true
+        description: 对比目录（新版本）
+        flag: dir-b
+      - name: output
+        type: string
+        required: false
+        description: 输出目录（默认 ./batch-compare-output）
+        flag: output
+      - name: diff-only
+        type: bool
+        required: false
+        default: false
+        description: 仅输出有差异的行
+        flag: diff-only

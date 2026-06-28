@@ -208,6 +208,8 @@ class ScriptExecutor:
 
         # 确保中文输出
         env["PYTHONIOENCODING"] = "utf-8"
+        env["LANG"] = "zh_CN.UTF-8"
+        env["LC_ALL"] = "zh_CN.UTF-8"
         # 让 shell 脚本也能获取 AIGUIBIN 环境变量
         for key, value in (env_vars or {}).items():
             env[key] = value

@@ -37,7 +37,7 @@ class CommandParser:
             return ParsedCommand(raw_input=raw_input)
 
         # 提取命令名（以 / 开头的第一个 token）
-        tokens = shlex.split(raw_input, posix=True)
+        tokens = shlex.split(raw_input, posix=False)
         if not tokens:
             return ParsedCommand(raw_input=raw_input)
 

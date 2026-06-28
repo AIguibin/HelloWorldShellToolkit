@@ -52,5 +52,9 @@ IF EXIST "%AIGUIBIN_CLI_HOME%\python\python.exe" (
     SET "PYTHON=python"
 )
 
+REM --- Python encoding for Chinese support ---
+SET "PYTHONIOENCODING=utf-8"
+SET "PYTHONUTF8=1"
+
 REM Execute aiguibin.py, passing all command line arguments
 "%PYTHON%" "%AIGUIBIN_CLI_HOME%\aiguibin.py" %*
