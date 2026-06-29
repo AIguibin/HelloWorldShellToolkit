@@ -13,6 +13,15 @@ import zipfile
 from datetime import datetime
 from pathlib import Path
 
+# ─── Windows 控制台 UTF-8 支持 ────────────────────
+if sys.platform == "win32":
+    os.system("")
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 # ─── 配置 ───────────────────────────────
 SCRIPT_DIR = Path(__file__).resolve().parent
 DIST_DIR = SCRIPT_DIR / "dist"

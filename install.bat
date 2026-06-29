@@ -10,12 +10,22 @@ REM     4. Node.js 22.x LTS (portable)
 REM     5. PATH environment variable
 REM     6. Application data directory (.agent/)
 REM
-REM   Usage: Double-click this file, or run from cmd
+REM   Usage: Right-click → Run as Administrator, or from admin cmd
+REM   Requires Administrator privileges (writes to system environment)
 REM ============================================================
+
+REM --- Admin check ---
+net session >nul 2>&1
+IF %ERRORLEVEL% NEQ 0 (
+    echo [ERROR] This installer requires Administrator privileges.
+    echo         Right-click install.bat → Run as Administrator.
+    pause
+    exit /b 1
+)
 
 echo.
 echo ============================================================
-echo   AIguibin Agent System v3.5 - Installer
+echo   AIguibin Agent System v3.5 - Installer (System-wide)
 echo ============================================================
 echo.
 
@@ -42,14 +52,14 @@ echo.
 
 REM --- 2. Set AIGUIBIN_CLI_HOME environment variable ---
 echo [2/14] Setting AIGUIBIN_CLI_HOME environment variable...
-powershell -NoProfile -Command "[Environment]::SetEnvironmentVariable('AIGUIBIN_CLI_HOME', '%INSTALL_DIR%', 'User')"
+powershell -NoProfile -Command "[Environment]::SetEnvironmentVariable('AIGUIBIN_CLI_HOME', '%INSTALL_DIR%', 'Machine')"
 SET "AIGUIBIN_CLI_HOME=%INSTALL_DIR%"
 echo        AIGUIBIN_CLI_HOME = %AIGUIBIN_CLI_HOME%
 echo.
 
 REM --- 2.1 Set AIGUIBIN_AGENT_DIR environment variable and create directories ---
 echo [2.1/14] Setting up application data directory...
-powershell -NoProfile -Command "[Environment]::SetEnvironmentVariable('AIGUIBIN_AGENT_DIR', '%INSTALL_DIR%\.agent', 'User')"
+powershell -NoProfile -Command "[Environment]::SetEnvironmentVariable('AIGUIBIN_AGENT_DIR', '%INSTALL_DIR%\.agent', 'Machine')"
 SET "AIGUIBIN_AGENT_DIR=%INSTALL_DIR%\.agent"
 echo        AIGUIBIN_AGENT_DIR = %AIGUIBIN_AGENT_DIR%
 
@@ -170,6 +180,8 @@ echo        python313._pth updated (import site + Lib\site-packages enabled)
 echo.
 
 REM --- 6. Install pip ---
+REM     Skip user pip.ini to avoid BOM/encoding issues
+SET "PIP_CONFIG_FILE=NUL"
 SET "GET_PIP=%PYTHON_DIR%\get-pip.py"
 SET "GET_PIP_URL=https://bootstrap.pypa.io/get-pip.py"
 
@@ -205,6 +217,13 @@ REM --- 7. Install Python dependencies ---
 SET "SITE_PKGS=%PYTHON_DIR%\Lib\site-packages"
 
 echo [7/14] Installing Python packages (rich, pyyaml, pyreadline3, openpyxl, xlrd==1.2.0)...
+
+REM 检查核心包是否已安装（离线场景跳过联网安装）
+"%PYTHON_DIR%\python.exe" -c "import rich, yaml, openpyxl, xlrd" 2>nul
+IF %ERRORLEVEL% EQU 0 (
+    echo        Packages already installed, skipping
+    GOTO :pkg_done
+)
 
 "%PYTHON_DIR%\python.exe" -m pip install rich pyyaml pyreadline3 openpyxl xlrd==1.2.0 --target "%SITE_PKGS%" -q
 IF %ERRORLEVEL% NEQ 0 GOTO :pkg_error
@@ -306,10 +325,10 @@ echo [12/14] Configuring PATH environment variable...
 SET "BIN_DIR=%INSTALL_DIR%\bin"
 
 REM Add bin/ to user PATH if not already present
-powershell -NoProfile -Command "$b='%BIN_DIR%'; $p=[Environment]::GetEnvironmentVariable('Path','User'); if($p -notlike \"*$b*\"){[Environment]::SetEnvironmentVariable('Path',\"$p;$b\",'User'); Write-Host '       Added to user PATH'}else{Write-Host '       Already in user PATH'}"
+powershell -NoProfile -Command "$b='%BIN_DIR%'; $p=[Environment]::GetEnvironmentVariable('Path','Machine'); if($p -notlike \"*$b*\"){[Environment]::SetEnvironmentVariable('Path',\"$p;$b\",'Machine'); Write-Host '       Added to system PATH'}else{Write-Host '       Already in system PATH'}"
 
 REM Add .PS1 to PATHEXT so PowerShell can find aiguibin.ps1 directly
-powershell -NoProfile -Command "$pe=[Environment]::GetEnvironmentVariable('PATHEXT','User'); if($pe -notlike '*PS1*'){[Environment]::SetEnvironmentVariable('PATHEXT',\"$pe;.PS1\",'User'); Write-Host '       Added .PS1 to PATHEXT'}else{Write-Host '       .PS1 already in PATHEXT'}"
+powershell -NoProfile -Command "$pe=[Environment]::GetEnvironmentVariable('PATHEXT','Machine'); if($pe -notlike '*PS1*'){[Environment]::SetEnvironmentVariable('PATHEXT',\"$pe;.PS1\",'Machine'); Write-Host '       Added .PS1 to system PATHEXT'}else{Write-Host '       .PS1 already in system PATHEXT'}"
 
 REM Update current session
 SET "PATH=%PATH%;%BIN_DIR%"

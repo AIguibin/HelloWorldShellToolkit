@@ -108,7 +108,7 @@ def run_one(file_a: Path, file_b: Path, out_dir: Path, category: str, diff_only:
     if diff_only:
         cmd.append("--diff-only")
 
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
 
     if result.returncode != 0:
         err = result.stderr.strip() or result.stdout.strip()
@@ -133,11 +133,19 @@ def main():
         description="批量对比两个目录下所有 Excel 文件，按子目录一一配对并生成差异报告"
     )
     parser.add_argument(
-        "dir_a",
+        "dir_a", nargs="?", default=None,
+        help="基板目录（基准版本）— 位置参数或 --dir-a",
+    )
+    parser.add_argument(
+        "dir_b", nargs="?", default=None,
+        help="对比目录（新版本）— 位置参数或 --dir-b",
+    )
+    parser.add_argument(
+        "--dir-a", dest="dir_a_opt", default=None,
         help="基板目录（基准版本）",
     )
     parser.add_argument(
-        "dir_b",
+        "--dir-b", dest="dir_b_opt", default=None,
         help="对比目录（新版本）",
     )
     parser.add_argument(
@@ -152,8 +160,15 @@ def main():
 
     args = parser.parse_args()
 
-    dir_a = Path(args.dir_a).resolve()
-    dir_b = Path(args.dir_b).resolve()
+    dir_a = Path(args.dir_a_opt or args.dir_a).resolve() if (args.dir_a_opt or args.dir_a) else None
+    dir_b = Path(args.dir_b_opt or args.dir_b).resolve() if (args.dir_b_opt or args.dir_b) else None
+
+    if not dir_a:
+        print("[错误] 缺少基板目录（位置参数1 或 --dir-a）")
+        sys.exit(1)
+    if not dir_b:
+        print("[错误] 缺少对比目录（位置参数2 或 --dir-b）")
+        sys.exit(1)
     out_dir = Path(args.output).resolve() if args.output else Path.cwd() / "batch-compare-output"
 
     if not dir_a.is_dir():
