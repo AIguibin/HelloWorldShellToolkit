@@ -1,0 +1,25 @@
+# ─── 行尾规范化（Windows 项目：CMD + PowerShell + Git Bash）───
+# 本文件覆盖本地 core.autocrlf 设置，确保所有机器 checkout 行为一致
+
+# CMD 批处理 — 硬性要求 CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# PowerShell — Windows PowerShell 兼容 CRLF
+*.ps1 text eol=crlf
+*.psm1 text eol=crlf
+
+# Shell 脚本 — 必须 LF（shebang / Git Bash）
+*.sh text eol=lf
+
+# 跨平台文本 — 统一 LF
+*.py text eol=lf
+*.js text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.rst text eol=lf
